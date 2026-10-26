@@ -1,7 +1,6 @@
 # SIAKAD mini — Bahan Audit Twelve-Factor (Praktikum 2)
 
-> ⚠️ Aplikasi ini **sengaja dibuat melanggar** beberapa prinsip Twelve-Factor App.
-> Jangan menyalin gayanya. Tugas Anda adalah menemukan pelanggarannya dan memperbaikinya.
+> ⚠️ Aplikasi ini adalah **bahan audit**, bukan contoh kode yang baik. Jangan menyalin gayanya.
 
 Gunakan folder ini **hanya jika** Anda tidak punya proyek lama untuk diaudit.
 Mengaudit proyek sendiri jauh lebih bermanfaat.
@@ -27,14 +26,16 @@ Aplikasi berjalan di `http://127.0.0.1:3000`.
 
 | Metode | Path | Keterangan |
 | --- | --- | --- |
-| `GET` | `/profil` | Menghitung kunjungan, menyimpan di sesi |
-| `POST` | `/upload` | Menyimpan berkas ke disk lokal |
-| `GET` | `/mahasiswa/:nim` | Membaca dari PostgreSQL |
+| `GET` | `/profil` | Menghitung kunjungan pengguna |
+| `POST` | `/upload` | Menerima berkas |
+| `GET` | `/mahasiswa/:nim` | Data satu mahasiswa |
+| `GET` | `/krs/:nim` | Daftar mata kuliah yang diambil |
 
 ```powershell
 # Uji cepat
 Invoke-RestMethod http://127.0.0.1:3000/profil
 Invoke-RestMethod http://127.0.0.1:3000/mahasiswa/105841100122
+Invoke-RestMethod http://127.0.0.1:3000/krs/105841100122
 ```
 
 ---
@@ -49,9 +50,8 @@ Ikuti [Praktikum 2](../../praktikum/02-praktikum-twelve-factor.md):
 4. **Tahap 4** — perbaiki *port binding*, *graceful shutdown*, dan *logging*.
 5. **Tahap 5** — review silang dengan kelompok lain.
 
-> 💡 **Petunjuk**: penanda `(a)` sampai `(g)` di `app.js` menandai pelanggaran yang paling
-> jelas. Masih ada beberapa pelanggaran lain yang **tidak** diberi penanda — temukan sendiri,
-> termasuk di `package.json` dan di repositori ini secara keseluruhan.
+> Audit ini menuntut Anda membaca **seluruh** isi folder, bukan `app.js` saja — termasuk
+> `package.json`, `compose.yaml`, dan berkas apa pun yang **seharusnya ada tetapi tidak ada**.
 
 ---
 
@@ -76,8 +76,8 @@ docker compose up -d
 
 | Gejala | Sebab | Solusi |
 | --- | --- | --- |
-| `ECONNREFUSED 127.0.0.1:5432` | PostgreSQL belum jalan | `docker compose up -d` |
-| `/upload` berhasil tapi log tak ditemukan | `/var/log` tidak bisa ditulis | Log jatuh ke `./logs/siakad.log` — ini sendiri temuan faktor X |
-| `curl localhost:3000` gagal dari WSL ke Windows | `app.listen(..., '127.0.0.1')` | Ini **pelanggaran faktor VII** yang harus Anda perbaiki |
-| `Ctrl+C` langsung mati tanpa pesan | Tidak ada penanganan `SIGTERM` | **Pelanggaran faktor IX** |
-| Port 3000 dipakai | Aplikasi lain berjalan | Hentikan, atau ubah port **setelah** faktor III diperbaiki |
+| `ECONNREFUSED 127.0.0.1:5432` | PostgreSQL belum jalan | `docker compose up -d`, tunggu status `healthy` |
+| `/upload` berhasil tapi log tak ada di `/var/log` | Direktori itu tidak dapat ditulis | Lihat `./logs/siakad.log` — catat juga mengapa bisa berbeda |
+| `curl localhost:3000` gagal dari WSL ke Windows | Alamat yang diikat proses | Jalankan `curl` dari sisi yang sama dengan proses |
+| `Ctrl+C` langsung mati tanpa pesan | Perilaku bawaan proses | Catat sebagai hasil pengamatan |
+| Port 3000 dipakai | Aplikasi lain berjalan | Hentikan proses tersebut |

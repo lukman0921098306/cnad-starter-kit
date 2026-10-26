@@ -41,6 +41,13 @@ Panduan pemasangan (WSL 2 + Windows) ada pada lembar **Praktikum 1** yang dibagi
 
 ---
 
+## Kontribusi
+
+Repositori ini **tidak menerima pull request** — lihat [CONTRIBUTING.md](CONTRIBUTING.md).
+PR yang dibuka akan ditutup otomatis beserta penjelasannya.
+
+---
+
 ## Catatan Penting
 
 - Kode di dalam `p2-siakad-mini/` **sengaja ditulis buruk**. Jangan dijadikan contoh gaya

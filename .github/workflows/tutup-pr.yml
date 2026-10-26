@@ -1,0 +1,72 @@
+name: Tutup Pull Request
+
+# Repositori ini bahan ajar satu arah: mahasiswa menyalin, bukan menyumbang.
+# Pull request ditutup otomatis dengan penjelasan.
+#
+# Memakai pull_request_target agar token punya izin tulis walau PR datang dari fork.
+# AMAN karena workflow ini TIDAK PERNAH melakukan checkout kode dari PR.
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  tutup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const pengirim = context.payload.pull_request.user.login;
+            const nomor = context.payload.pull_request.number;
+
+            const pesan = [
+              `Halo @${pengirim}, terima kasih sudah membuka pull request.`,
+              ``,
+              `Repositori ini adalah **bahan ajar satu arah** untuk mata kuliah`,
+              `Cloud-Native Application Development. Isinya sengaja ditulis bermasalah`,
+              `sebagai bahan audit, jadi "perbaikan" terhadapnya justru menghilangkan`,
+              `inti latihannya. Karena itu pull request ditutup otomatis.`,
+              ``,
+              `### Cara mengerjakan praktikum`,
+              ``,
+              '```bash',
+              `git clone https://github.com/${context.repo.owner}/${context.repo.repo}.git`,
+              `cd ${context.repo.repo}/p2-siakad-mini`,
+              `npm install`,
+              '```',
+              ``,
+              `Salin isinya ke **repositori kelompok Anda sendiri**, lalu kerjakan di sana.`,
+              `Riwayat commit di repo kelompok itulah yang dinilai sebagai bukti kontribusi`,
+              `individu pada UAS.`,
+              ``,
+              `### Menemukan kesalahan yang sebenarnya?`,
+              ``,
+              `Jika ada kekeliruan nyata pada bahan ini (bukan pelanggaran yang disengaja),`,
+              `sampaikan lewat kanal kelas atau langsung ke dosen pengampu. Jangan lewat`,
+              `pull request.`
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: nomor,
+              body: pesan
+            });
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: nomor,
+              state: 'closed'
+            });
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: nomor,
+              labels: ['ditutup-otomatis']
+            }).catch(() => {});   // label mungkin belum ada, abaikan

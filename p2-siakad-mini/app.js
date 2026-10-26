@@ -1,13 +1,13 @@
-const express = require('express');
-const session = require('express-session');
-const fs = require('fs');
-const path = require('path');
-const { Pool } = require('pg');
+import express from 'express';
+import session from 'express-session';
+import fs from 'fs';
+import path from 'path';
+import pg from 'pg';
 
 const app = express();
 app.use(express.json({ limit: '5mb' }));
 
-const pool = new Pool({
+const pool = new pg.Pool({
   host: 'localhost',
   user: 'postgres',
   password: 'postgres123',
@@ -16,7 +16,7 @@ const pool = new Pool({
 
 app.use(session({ secret: 'rahasia', resave: true, saveUninitialized: true }));
 
-fs.mkdirSync(path.join(__dirname, 'uploads'), { recursive: true });
+fs.mkdirSync(path.join(import.meta.dirname, 'uploads'), { recursive: true });
 
 app.post('/upload', (req, res) => {
   fs.writeFileSync('./uploads/' + req.body.name, req.body.data ?? '');
@@ -62,7 +62,7 @@ function tulisLog(pesan) {
   try {
     fs.appendFileSync('/var/log/siakad.log', baris);
   } catch {
-    fs.mkdirSync(path.join(__dirname, 'logs'), { recursive: true });
-    fs.appendFileSync(path.join(__dirname, 'logs', 'siakad.log'), baris);
+    fs.mkdirSync(path.join(import.meta.dirname, 'logs'), { recursive: true });
+    fs.appendFileSync(path.join(import.meta.dirname, 'logs', 'siakad.log'), baris);
   }
 }

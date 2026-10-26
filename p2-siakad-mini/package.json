@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "SIAKAD mini - aplikasi contoh untuk audit Twelve-Factor App",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

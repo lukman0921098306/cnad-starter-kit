@@ -10,12 +10,12 @@ Program Studi Informatika, Universitas Muhammadiyah Makassar.
 | `git clone` dan menyalin isinya | ✅ |
 | *Fork* untuk keperluan sendiri | ✅ |
 | Mengerjakan praktikum di repositori kelompok Anda | ✅ |
-| Membuka **pull request** ke repositori ini | ❌ ditutup otomatis |
+| Membuka **pull request** ke repositori ini | ❌ tidak digabungkan |
 | Meminta akses *push* | ❌ tidak akan diberikan |
 
 ---
 
-## Mengapa pull request ditutup?
+## Mengapa pull request tidak diterima?
 
 Kode pada `p2-siakad-mini/` **sengaja ditulis melanggar** prinsip Twelve-Factor App —
 konfigurasi tertanam di kode, sesi di memori proses, log ke berkas, dan seterusnya.

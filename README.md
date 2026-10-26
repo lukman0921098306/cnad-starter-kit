@@ -44,7 +44,7 @@ Panduan pemasangan (WSL 2 + Windows) ada pada lembar **Praktikum 1** yang dibagi
 ## Kontribusi
 
 Repositori ini **tidak menerima pull request** — lihat [CONTRIBUTING.md](CONTRIBUTING.md).
-PR yang dibuka akan ditutup otomatis beserta penjelasannya.
+PR yang dibuka tidak akan ditinjau maupun digabungkan.
 
 ---
 

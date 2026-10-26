@@ -9,13 +9,17 @@ Mengaudit proyek sendiri jauh lebih bermanfaat.
 
 ## Menjalankan
 
+Butuh **Node.js 20.11+** (kode memakai `import.meta.dirname`) dan Docker.
+
+Ikuti **Langkah 1.1 Jalur B** pada lembar Praktikum 2 — salin folder ini ke area kerja Anda
+sendiri lebih dulu, jangan bekerja di dalam hasil *clone* repositori dosen.
+
 ```powershell
-cd starter/p2-siakad-mini
 npm install
 
-# Opsional: nyalakan PostgreSQL & Redis pendukung
+# Nyalakan PostgreSQL & Redis pendukung
 docker compose up -d
-docker compose ps
+docker compose ps            # tunggu kolom STATUS menjadi "healthy"
 
 node app.js
 ```

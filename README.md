@@ -41,20 +41,18 @@ Panduan pemasangan (WSL 2 + Windows) ada pada lembar **Praktikum 1** yang dibagi
 
 ---
 
-## Kontribusi
-
-Repositori ini **tidak menerima pull request** — lihat [CONTRIBUTING.md](CONTRIBUTING.md).
-PR yang dibuka tidak akan ditinjau maupun digabungkan.
-
----
-
 ## Catatan Penting
 
 - Kode di dalam `p2-siakad-mini/` **sengaja ditulis buruk**. Jangan dijadikan contoh gaya
   penulisan kode. Tugas Anda adalah menemukan pelanggarannya dan memperbaikinya.
-- **Jangan** mengerjakan langsung di repositori ini. *Fork* atau salin ke repositori
-  kelompok Anda sendiri, lalu kerjakan di sana.
-- Pertanyaan teknis: ajukan lewat kanal kelas, bukan lewat *issue* di repositori ini.
+- **Jangan** mengerjakan langsung di repositori ini. Salin ke repositori kelompok Anda
+  sendiri, lalu kerjakan di sana. Riwayat commit di repositori kelompok adalah bukti
+  kontribusi individu yang dinilai saat UAS.
+- Repositori ini **satu arah**: tidak menerima *pull request* maupun permintaan akses *push*.
+  Memperbaiki pelanggaran di sini justru menghapus soalnya untuk mahasiswa lain.
+- Menemukan kekeliruan yang sebenarnya — perintah tidak jalan, berkas hilang, petunjuk keliru
+  (**bukan** pelanggaran yang disengaja)? Sampaikan lewat kanal kelas atau langsung ke dosen
+  pengampu, bukan lewat *issue* di repositori ini.
 
 ---
 

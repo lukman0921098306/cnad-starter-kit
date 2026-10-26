@@ -1,5 +1,4 @@
 # Dikecualikan dari arsip (Download ZIP / git archive).
 # Tidak berpengaruh pada git clone - clone selalu mengambil seluruh repositori.
-.gitattributes  export-ignore
-.gitignore      export-ignore
-CONTRIBUTING.md export-ignore
+.gitattributes export-ignore
+.gitignore     export-ignore
